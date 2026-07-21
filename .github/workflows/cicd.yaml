@@ -1,14 +1,22 @@
-name: deploy
+name: cicd
 on:
-  push:
-    branches: [main]
-
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
 defaults:
   run:
     working-directory: launchpad
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+      - run: npm clean-install
+      - run: npm run test
   deploy:
+    needs: test
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -16,7 +24,8 @@ jobs:
       - run: npm clean-install
       - run: npm run build
         env:
-          VITE_BOARD_URL: ${{ vars.BOARD_URL }}
+         VITE_BOARD_URL: ${{ vars.BOARD_URL }}
+         VITE_CALLSIGN: ${{ github.actor }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: launchpad/dist
