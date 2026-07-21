@@ -35,10 +35,6 @@ jobs:
         with:
           path: launchpad/dist
       - uses: actions/deploy-pages@v5
-      - run: bash scripts/report.sh
-        env:
-          BOARD_URL: ${{ vars.BOARD_URL }}
-          SHIPIT_TOKEN: ${{ secrets.SHIPIT_TOKEN }}
 
 permissions:
   pages: write
