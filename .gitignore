@@ -10,3 +10,6 @@ test-results/
 
 # M5: local output of scripts/release-launchpad.sh
 .launchpad-release/
+
+# operator runbook — contains the live class token
+docs/ops/
