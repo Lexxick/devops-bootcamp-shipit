@@ -16,6 +16,7 @@ jobs:
       - run: npm clean-install
       - run: npm run test
   deploy:
+    needs: test
     if: always() && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
