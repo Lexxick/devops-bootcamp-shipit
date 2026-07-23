@@ -28,7 +28,7 @@ jobs:
         with:
           context: board
           push: true
-          tags: ghcr.io/board-image/shipit-board:latest
+          tags: ghcr.io/lexxick/shipit-board:latest
 
 permissions:
   contents: read
